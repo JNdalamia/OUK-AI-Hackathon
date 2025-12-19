@@ -1,5 +1,8 @@
 # 🎯 Smart Career Path Navigator
-
+AI HACKATHON
+NAME: JASON NDALAMIA
+GITHUB REPOSITORY LINK: https://github.com/JNdalamia/OUK-AI-Hackathon.git
+GOOGLE DRIVE LINK: https://drive.google.com/drive/folders/1xogGO_19iAZ2UGfkRB4TFMOjXgCJr6IQ?usp=sharing 
 **AI-Powered Career Guidance Platform built with JacLang**
 
 A full-stack application that provides personalized career advice, learning roadmaps, job market analysis, and alternative career path suggestions using AI (Gemini).
@@ -235,17 +238,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 If you find this project helpful, please consider giving it a star! ⭐
 
 ---
-
-## 📸 Screenshots
-
-### Main Dashboard
-![Dashboard](career-navigator/images/Landing Page.png)
-
-### Career Advice Agent
-![Career Advice](career-navigator/images/Get Advice.png)
-
-### Learning Roadmap
-![Roadmap](career-navigator/images/Roadmap.png)
 
 ---
 
