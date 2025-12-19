@@ -21,8 +21,8 @@ A full-stack application that provides personalized career advice, learning road
 
 ### 💻 Modern Tech Stack
 - **Backend**: JacLang with OSP (Object-Spatial Programming) graph architecture
-- **Frontend**: React-style components using Jac-Client
-- **AI**: Google Gemini 2.5 Flash via byLLM
+- **Frontend**: Jac-Client
+- **AI**: Google Gemini 1.5 Flash via byLLM
 - **UI**: Gradient design with responsive layout
 
 ### 🎨 User Experience
@@ -46,7 +46,7 @@ A full-stack application that provides personalized career advice, learning road
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/YOUR_USERNAME/smart-career-navigator.git
+git clone https://github.com/JNdalamia/OUK-AI-Hackathon.git
 cd smart-career-navigator
 ```
 
@@ -55,17 +55,16 @@ cd smart-career-navigator
 pip install jaclang jac-cloud byllm
 ```
 
-3. **Set up environment variables**
+3. **Set up environment**
 ```bash
-# Copy the example env file
-cp .env.example .env
-
-# Edit .env and add your API key
-nano .env  # or use any text editor
+Create the environment: Run the appropriate command in the terminal (using .venv as the folder name is standard practice):
+Windows: python -m venv .venv
+macOS/Linux: python3 -m venv .venv
 ```
 
 4. **Run the application**
 ```bash
+jac build app.jac #to compile
 jac serve app.jac
 ```
 
@@ -94,11 +93,11 @@ GEMINI_API_KEY=your_gemini_api_key_here
 
 ### Model Configuration
 
-By default, the app uses Gemini 2.5 Flash. To change the model, edit `app.jac`:
+By default, the app uses Gemini 1.5 Flash. To change the model, edit `app.jac`:
 
 ```jac
 # Line 24
-glob llm = Model(model_name="gemini/gemini-2.5-flash");
+glob llm = Model(model_name="gemini/gemini-1.5-flash");
 
 ```
 
@@ -179,31 +178,6 @@ Visit `http://localhost:8000/docs` for interactive API documentation.
 
 ---
 
-## 🛠️ Development
-
-### Running in Development Mode
-
-```bash
-# With auto-reload on file changes
-jac serve app.jac --reload
-
-# With verbose logging
-jac serve app.jac --verbose
-
-# Custom port
-jac serve app.jac --port 3000
-```
-
-### Testing
-
-```bash
-# Test individual walkers
-jac run app.jac -w get_advice
-
-```
-
-
----
 
 ## 🤝 Contributing
 
@@ -232,77 +206,6 @@ Contributions are welcome! Here's how you can help:
 
 ---
 
-## 🐛 Troubleshooting
-
-### Issue: AI returns empty responses
-**Solution**: Check that your API key is set correctly
-```bash
-echo $GEMINI_API_KEY
-# Should output your key
-```
-
-### Issue: "Module not found" errors
-**Solution**: Reinstall dependencies
-```bash
-pip install --upgrade jaclang jac-cloud byllm
-```
-
-### Issue: Port already in use
-**Solution**: Use a different port
-```bash
-jac serve app.jac --port 8001
-```
-
-### Issue: LiteLLM errors
-**Solution**: Enable debug mode and check terminal output
-```jac
-litellm.set_verbose = True;
-```
-
-For more help, see [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
-
----
-
-## 📊 Performance
-
-- **Cold start**: ~2-3 seconds
-- **AI response time**: 5-15 seconds (depends on Gemini API)
-- **Memory usage**: ~150-200 MB
-- **Concurrent users**: Supports multiple users (limited by API rate limits)
-
----
-
-## 🔐 Security
-
-- ✅ API keys stored in `.env` (not committed to git)
-- ✅ Input validation on all user inputs
-- ✅ Error messages don't expose sensitive data
-- ✅ HTTPS recommended for production
-- ⚠️ Rate limiting should be added for production use
-
----
-
-## 🌐 Deployment
-
-### Deploy to Production
-
-1. **Set environment variables** on your hosting platform
-2. **Install dependencies**: `pip install -r requirements.txt`
-3. **Run with production settings**:
-   ```bash
-   jac serve app.jac --host 0.0.0.0 --port 8000
-   ```
-
-### Recommended Platforms
-- **Heroku** - Easy deployment with Procfile
-- **Railway** - One-click deploy
-- **DigitalOcean** - Full control
-- **AWS/GCP/Azure** - Enterprise scale
-
-See [DEPLOYMENT.md](docs/DEPLOYMENT.md) for detailed instructions.
-
----
-
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -314,39 +217,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **JacLang Team** - For the amazing language and framework
 - **Google** - For Gemini API access
 - **byLLM** - For unified AI provider interface
-- **Contributors** - Everyone who helps improve this project
+- **Contributors** - Everyone at Open University Kenya and the BCS team
 
 ---
 
 ## 📧 Contact
 
-**Project Maintainer**: Your Name  
-**Email**: your.email@example.com  
-**GitHub**: [@yourusername](https://github.com/yourusername)  
-**Project Link**: [https://github.com/yourusername/smart-career-navigator](https://github.com/yourusername/smart-career-navigator)
-
----
-
-## 🗺️ Roadmap
-
-### Version 1.0 (Current) ✅
-- [x] Basic AI agents
-- [x] User profile management
-- [x] Responsive UI
-- [x] Error handling
-
-### Version 1.1 (Planned)
-- [ ] Resume parsing (PDF upload)
-- [ ] Job posting scraper
-- [ ] Skill proficiency tracking
-- [ ] Learning progress dashboard
-
-### Version 2.0 (Future)
-- [ ] User authentication
-- [ ] Database persistence
-- [ ] Multi-language support
-- [ ] Mobile app (React Native)
-- [ ] Team collaboration features
+**Project Maintainer**: Jason Ndalamia
+**Email**: jahson.ndalamia@gmail.com 
+**GitHub**: [https://github.com/JNdalamia]  
+**Project Link**: [https://github.com/JNdalamia/OUK-AI-Hackathon.git]
 
 ---
 
@@ -359,13 +239,13 @@ If you find this project helpful, please consider giving it a star! ⭐
 ## 📸 Screenshots
 
 ### Main Dashboard
-![Dashboard](docs/images/dashboard.png)
+![Dashboard](career-navigator/images/Landing Page.png)
 
 ### Career Advice Agent
-![Career Advice](docs/images/career-advice.png)
+![Career Advice](career-navigator/images/Get Advice.png)
 
 ### Learning Roadmap
-![Roadmap](docs/images/roadmap.png)
+![Roadmap](career-navigator/images/Roadmap.png)
 
 ---
 
@@ -373,8 +253,6 @@ If you find this project helpful, please consider giving it a star! ⭐
 
 **Built with ❤️ using JacLang**
 
-[Report Bug](https://github.com/yourusername/smart-career-navigator/issues) · 
-[Request Feature](https://github.com/yourusername/smart-career-navigator/issues) · 
-[Documentation](https://github.com/yourusername/smart-career-navigator/wiki)
 
 </div>
+

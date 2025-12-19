@@ -14,18 +14,13 @@ function Header() {
   return __jacJsx("div", {
     "style": {
       "textAlign": "center",
-      "marginBottom": "30px"
+      "marginBottom": "30px",
+      "background": "#2c3e50",
+      "padding": "20px",
+      "color": "white",
+      "borderRadius": "8px"
     }
-  }, [__jacJsx("h1", {
-    "style": {
-      "color": "#2c3e50",
-      "fontSize": "2.5rem"
-    }
-  }, ["🎯 Smart Career Navigator"]), __jacJsx("p", {
-    "style": {
-      "color": "#7f8c8d"
-    }
-  }, ["AI-Powered Career Guidance Platform"])]);
+  }, [__jacJsx("h1", {}, ["🧭 Smart Career Navigator"]), __jacJsx("p", {}, ["Graph-Based Career Guidance System"])]);
 }
 function app() {
   var _useState = useState("Loading..."),
@@ -64,21 +59,16 @@ function app() {
     _useState16 = _slicedToArray(_useState15, 2),
     loading = _useState16[0],
     setLoading = _useState16[1];
-  var _useState17 = useState(""),
-    _useState18 = _slicedToArray(_useState17, 2),
-    error = _useState18[0],
-    setError = _useState18[1];
   useEffect(function () {
     function load() {
       return _load.apply(this, arguments);
     }
     function _load() {
       _load = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-        var resp, d, _t;
+        var resp, d;
         return _regenerator().w(function (_context) {
-          while (1) switch (_context.p = _context.n) {
+          while (1) switch (_context.n) {
             case 0:
-              _context.p = 0;
               _context.n = 1;
               return __jacSpawn("get_initial_data", "", {});
             case 1:
@@ -92,17 +82,10 @@ function app() {
                 setInterests(d["interests"]);
                 setLocation(d["location"]);
               }
-              _context.n = 3;
-              break;
             case 2:
-              _context.p = 2;
-              _t = _context.v;
-              console.error("Error loading initial data:", _t);
-              setError("Failed to load initial data");
-            case 3:
               return _context.a(2);
           }
-        }, _callee, null, [[0, 2]]);
+        }, _callee);
       }));
       return _load.apply(this, arguments);
     }
@@ -113,112 +96,92 @@ function app() {
   }
   function _runAgent() {
     _runAgent = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee2(type) {
-      var resp, content, _t2;
+      var resp;
       return _regenerator().w(function (_context2) {
-        while (1) switch (_context2.p = _context2.n) {
+        while (1) switch (_context2.n) {
           case 0:
             setLoading(true);
             setOutputTitle();
             setOutputContent("");
-            setError("");
-            console.log("\uD83D\uDE80 Starting agent:");
-            _context2.p = 1;
             resp = null;
             if (!(type === "Career Advice")) {
-              _context2.n = 3;
+              _context2.n = 2;
               break;
             }
-            _context2.n = 2;
+            _context2.n = 1;
             return __jacSpawn("get_advice", "", {
               "target_role": target,
               "current_skills": skills
             });
-          case 2:
+          case 1:
             resp = _context2.v;
-            _context2.n = 11;
+            _context2.n = 10;
             break;
-          case 3:
+          case 2:
             if (!(type === "Study Roadmap")) {
-              _context2.n = 5;
+              _context2.n = 4;
               break;
             }
-            _context2.n = 4;
+            _context2.n = 3;
             return __jacSpawn("get_roadmap", "", {
               "target_role": target,
               "current_skills": skills
             });
-          case 4:
+          case 3:
             resp = _context2.v;
-            _context2.n = 11;
+            _context2.n = 10;
             break;
-          case 5:
+          case 4:
             if (!(type === "Market Analysis")) {
-              _context2.n = 7;
+              _context2.n = 6;
               break;
             }
-            _context2.n = 6;
+            _context2.n = 5;
             return __jacSpawn("get_market_analysis", "", {
               "role_title": target,
               "location": location
             });
-          case 6:
+          case 5:
             resp = _context2.v;
-            _context2.n = 11;
+            _context2.n = 10;
             break;
-          case 7:
+          case 6:
             if (!(type === "Path Suggestions")) {
-              _context2.n = 9;
+              _context2.n = 8;
               break;
             }
-            _context2.n = 8;
+            _context2.n = 7;
             return __jacSpawn("get_path_suggestions", "", {
               "current_skills": skills,
               "interests": interests
             });
-          case 8:
+          case 7:
             resp = _context2.v;
-            _context2.n = 11;
+            _context2.n = 10;
             break;
-          case 9:
+          case 8:
             if (!(type === "Resume Summary")) {
-              _context2.n = 11;
+              _context2.n = 10;
               break;
             }
-            _context2.n = 10;
+            _context2.n = 9;
             return __jacSpawn("get_resume_summary", "", {
               "name": name,
               "skills": skills,
               "role": role,
               "target_role": target
             });
-          case 10:
+          case 9:
             resp = _context2.v;
-          case 11:
-            console.log("\uD83D\uDCE6 Response received:", resp);
-            if (resp && resp.reports && resp.reports.length > 0) {
-              content = resp.reports[0];
-              console.log("\u2705 Content:", content);
-              if (content && content.length > 0) {
-                setOutputContent(content);
-              } else {
-                setError("AI returned empty response. Check API key and try again.");
-              }
-            } else {
-              setError("No response from AI. Check terminal for errors.");
+          case 10:
+            if (resp.reports) {
+              setOutputContent(resp.reports[0]);
             }
-            _context2.n = 13;
-            break;
-          case 12:
-            _context2.p = 12;
-            _t2 = _context2.v;
-            console.error("\u274C Error:", _t2);
-            setError("Error: " + func(_t2) + ". Check browser console and terminal.");
-          case 13:
             setLoading(false);
-          case 14:
+          case 11:
             return _context2.a(2);
         }
-      }, _callee2, null, [[1, 12]]);
+      }, _callee2);
     }));
     return _runAgent.apply(this, arguments);
   }
@@ -230,33 +193,20 @@ function app() {
         "padding": "20px",
         "borderRadius": "12px",
         "marginTop": "20px",
-        "border": "1px solid #d1e7dd",
-        "boxShadow": "0 2px 4px rgba(0,0,0,0.05)"
+        "border": "1px solid #d1e7dd"
       }
     }, [__jacJsx("h3", {
       "style": {
         "marginTop": "0",
-        "color": "#198754",
-        "display": "flex",
-        "alignItems": "center",
-        "gap": "10px"
+        "color": "#198754"
       }
-    }, [__jacJsx("span", {}, ["✨"]), __jacJsx("span", {}, [outputTitle])]), __jacJsx("div", {
-      "style": {
-        "background": "white",
-        "padding": "15px",
-        "borderRadius": "8px",
-        "marginTop": "10px"
-      }
-    }, [__jacJsx("pre", {
+    }, [outputTitle]), __jacJsx("pre", {
       "style": {
         "whiteSpace": "pre-wrap",
         "fontFamily": "inherit",
-        "color": "#333",
-        "lineHeight": "1.6",
-        "margin": "0"
+        "color": "#333"
       }
-    }, [outputContent])])]);
+    }, [outputContent])]);
   }
   var loadingArea = null;
   if (loading) {
@@ -264,93 +214,53 @@ function app() {
       "style": {
         "textAlign": "center",
         "marginTop": "20px",
-        "padding": "30px",
-        "background": "#f8f9fa",
-        "borderRadius": "12px"
+        "color": "#7f8c8d"
       }
-    }, [__jacJsx("div", {
-      "style": {
-        "fontSize": "3rem",
-        "marginBottom": "15px",
-        "animation": "pulse 2s infinite"
-      }
-    }, ["🤖"]), __jacJsx("div", {
-      "style": {
-        "fontSize": "1.1em",
-        "color": "#495057",
-        "fontWeight": "500"
-      }
-    }, ["AI Agent is thinking..."]), __jacJsx("div", {
-      "style": {
-        "fontSize": "0.9em",
-        "marginTop": "8px",
-        "color": "#6c757d"
-      }
-    }, ["This may take 5-15 seconds"])]);
-  }
-  var errorArea = null;
-  if (error) {
-    errorArea = __jacJsx("div", {
-      "style": {
-        "background": "#f8d7da",
-        "color": "#721c24",
-        "padding": "15px",
-        "borderRadius": "8px",
-        "marginTop": "20px",
-        "border": "1px solid #f5c6cb"
-      }
-    }, [__jacJsx("strong", {}, ["⚠️ Error:"]), __jacJsx("div", {
-      "style": {
-        "marginTop": "5px"
-      }
-    }, [error])]);
+    }, ["🤖 AI Agent is thinking..."]);
   }
   return __jacJsx("div", {
     "style": {
-      "fontFamily": "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
-      "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      "fontFamily": "Segoe UI, sans-serif",
+      "background": "#f0f2f5",
       "minHeight": "100vh",
       "padding": "20px"
     }
-  }, [__jacJsx("div", {
-    "style": {
-      "maxWidth": "1200px",
-      "margin": "0 auto"
-    }
   }, [__jacJsx(Header, {}, []), __jacJsx("div", {
     "style": {
+      "maxWidth": "1100px",
+      "margin": "0 auto",
       "display": "grid",
       "gridTemplateColumns": "1fr 1fr",
-      "gap": "25px"
+      "gap": "20px"
     }
   }, [__jacJsx("div", {
     "style": {
       "background": "white",
-      "padding": "25px",
-      "borderRadius": "16px",
-      "boxShadow": "0 10px 30px rgba(0,0,0,0.1)"
+      "padding": "20px",
+      "borderRadius": "12px",
+      "boxShadow": "0 4px 6px rgba(0,0,0,0.1)"
     }
   }, [__jacJsx("h3", {
     "style": {
-      "borderBottom": "3px solid #667eea",
-      "paddingBottom": "12px",
-      "color": "#2c3e50",
-      "margin": "0 0 20px 0",
-      "fontSize": "1.3em"
+      "borderBottom": "2px solid #3498db",
+      "paddingBottom": "10px",
+      "color": "#2c3e50"
     }
   }, ["👤 Your Profile"]), __jacJsx("div", {
     "style": {
       "display": "grid",
       "gridTemplateColumns": "1fr 1fr",
-      "gap": "15px"
+      "gap": "10px"
     }
-  }, [__jacJsx("div", {}, [__jacJsx("label", {
+  }, [__jacJsx("div", {
+    "style": {
+      "marginBottom": "10px"
+    }
+  }, [__jacJsx("label", {
     "style": {
       "display": "block",
-      "color": "#6c757d",
-      "fontSize": "0.85em",
-      "marginBottom": "5px",
-      "fontWeight": "500"
+      "color": "#7f8c8d",
+      "fontSize": "0.9em"
     }
   }, ["Name"]), __jacJsx("input", {
     "value": name,
@@ -359,18 +269,19 @@ function app() {
     },
     "style": {
       "width": "100%",
-      "padding": "10px",
-      "borderRadius": "6px",
-      "border": "2px solid #e9ecef",
-      "fontSize": "0.95em"
+      "padding": "8px",
+      "borderRadius": "4px",
+      "border": "1px solid #ddd"
     }
-  }, [])]), __jacJsx("div", {}, [__jacJsx("label", {
+  }, [])]), __jacJsx("div", {
+    "style": {
+      "marginBottom": "10px"
+    }
+  }, [__jacJsx("label", {
     "style": {
       "display": "block",
-      "color": "#6c757d",
-      "fontSize": "0.85em",
-      "marginBottom": "5px",
-      "fontWeight": "500"
+      "color": "#7f8c8d",
+      "fontSize": "0.9em"
     }
   }, ["Current Role"]), __jacJsx("input", {
     "value": role,
@@ -379,22 +290,19 @@ function app() {
     },
     "style": {
       "width": "100%",
-      "padding": "10px",
-      "borderRadius": "6px",
-      "border": "2px solid #e9ecef",
-      "fontSize": "0.95em"
+      "padding": "8px",
+      "borderRadius": "4px",
+      "border": "1px solid #ddd"
     }
   }, [])])]), __jacJsx("div", {
     "style": {
-      "marginTop": "15px"
+      "marginBottom": "10px"
     }
   }, [__jacJsx("label", {
     "style": {
       "display": "block",
-      "color": "#6c757d",
-      "fontSize": "0.85em",
-      "marginBottom": "5px",
-      "fontWeight": "500"
+      "color": "#7f8c8d",
+      "fontSize": "0.9em"
     }
   }, ["Current Skills"]), __jacJsx("textarea", {
     "value": skills,
@@ -403,24 +311,20 @@ function app() {
     },
     "style": {
       "width": "100%",
-      "padding": "10px",
-      "borderRadius": "6px",
-      "border": "2px solid #e9ecef",
-      "height": "70px",
-      "fontSize": "0.95em",
-      "resize": "vertical"
+      "padding": "8px",
+      "borderRadius": "4px",
+      "border": "1px solid #ddd",
+      "height": "60px"
     }
   }, [])]), __jacJsx("div", {
     "style": {
-      "marginTop": "15px"
+      "marginBottom": "10px"
     }
   }, [__jacJsx("label", {
     "style": {
       "display": "block",
-      "color": "#6c757d",
-      "fontSize": "0.85em",
-      "marginBottom": "5px",
-      "fontWeight": "500"
+      "color": "#7f8c8d",
+      "fontSize": "0.9em"
     }
   }, ["Interests"]), __jacJsx("input", {
     "value": interests,
@@ -429,46 +333,46 @@ function app() {
     },
     "style": {
       "width": "100%",
-      "padding": "10px",
-      "borderRadius": "6px",
-      "border": "2px solid #e9ecef",
-      "fontSize": "0.95em"
+      "padding": "8px",
+      "borderRadius": "4px",
+      "border": "1px solid #ddd"
     }
   }, [])]), __jacJsx("div", {
     "style": {
       "display": "grid",
       "gridTemplateColumns": "1fr 1fr",
-      "gap": "15px",
-      "marginTop": "15px"
+      "gap": "10px"
     }
-  }, [__jacJsx("div", {}, [__jacJsx("label", {
+  }, [__jacJsx("div", {
+    "style": {
+      "marginBottom": "10px"
+    }
+  }, [__jacJsx("label", {
     "style": {
       "display": "block",
-      "color": "#667eea",
-      "fontSize": "0.85em",
-      "marginBottom": "5px",
+      "color": "#2c3e50",
       "fontWeight": "bold"
     }
-  }, ["🎯 target Role"]), __jacJsx("input", {
+  }, ["🎯 Target Role"]), __jacJsx("input", {
     "value": target,
     "onChange": function onChange(e) {
       setTarget(e.target.value);
     },
     "style": {
       "width": "100%",
-      "padding": "10px",
-      "borderRadius": "6px",
-      "border": "2px solid #667eea",
-      "fontSize": "0.95em",
-      "fontWeight": "500"
+      "padding": "8px",
+      "borderRadius": "4px",
+      "border": "2px solid #3498db"
     }
-  }, [])]), __jacJsx("div", {}, [__jacJsx("label", {
+  }, [])]), __jacJsx("div", {
+    "style": {
+      "marginBottom": "10px"
+    }
+  }, [__jacJsx("label", {
     "style": {
       "display": "block",
-      "color": "#6c757d",
-      "fontSize": "0.85em",
-      "marginBottom": "5px",
-      "fontWeight": "500"
+      "color": "#2c3e50",
+      "fontWeight": "bold"
     }
   }, ["🌍 Location"]), __jacJsx("input", {
     "value": location,
@@ -477,37 +381,34 @@ function app() {
     },
     "style": {
       "width": "100%",
-      "padding": "10px",
-      "borderRadius": "6px",
-      "border": "2px solid #e9ecef",
-      "fontSize": "0.95em"
+      "padding": "8px",
+      "borderRadius": "4px",
+      "border": "1px solid #ddd"
     }
   }, [])])])]), __jacJsx("div", {
     "style": {
       "background": "white",
-      "padding": "25px",
-      "borderRadius": "16px",
-      "boxShadow": "0 10px 30px rgba(0,0,0,0.1)"
+      "padding": "20px",
+      "borderRadius": "12px",
+      "boxShadow": "0 4px 6px rgba(0,0,0,0.1)"
     }
   }, [__jacJsx("h3", {
     "style": {
-      "borderBottom": "3px solid #764ba2",
-      "paddingBottom": "12px",
-      "color": "#2c3e50",
-      "margin": "0 0 20px 0",
-      "fontSize": "1.3em"
+      "borderBottom": "2px solid #9b59b6",
+      "paddingBottom": "10px",
+      "color": "#2c3e50"
     }
-  }, ["🤖 AI Career Agents"]), __jacJsx("p", {
+  }, ["🤖 AI Agents"]), __jacJsx("p", {
     "style": {
-      "color": "#6c757d",
+      "color": "#7f8c8d",
       "marginBottom": "20px",
       "fontSize": "0.9em"
     }
-  }, ["Click an agent to get AI-powered insights:"]), __jacJsx("div", {
+  }, ["Select an agent to analyze your profile:"]), __jacJsx("div", {
     "style": {
       "display": "grid",
       "gridTemplateColumns": "1fr 1fr",
-      "gap": "12px"
+      "gap": "10px"
     }
   }, [__jacJsx("button", {
     "onClick": function onClick() {
@@ -515,50 +416,38 @@ function app() {
     },
     "disabled": loading,
     "style": {
-      "padding": "14px",
-      "background": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      "padding": "12px",
+      "background": "#3498db",
       "color": "white",
       "border": "none",
-      "borderRadius": "8px",
-      "cursor": "pointer",
-      "fontSize": "0.95em",
-      "fontWeight": "600",
-      "transition": "transform 0.2s",
-      "boxShadow": "0 4px 10px rgba(102, 126, 234, 0.3)"
+      "borderRadius": "6px",
+      "cursor": "pointer"
     }
-  }, ["✨ Career Advice"]), __jacJsx("button", {
+  }, ["✨ Advice"]), __jacJsx("button", {
     "onClick": function onClick() {
       runAgent("Study Roadmap");
     },
     "disabled": loading,
     "style": {
-      "padding": "14px",
-      "background": "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+      "padding": "12px",
+      "background": "#9b59b6",
       "color": "white",
       "border": "none",
-      "borderRadius": "8px",
-      "cursor": "pointer",
-      "fontSize": "0.95em",
-      "fontWeight": "600",
-      "transition": "transform 0.2s",
-      "boxShadow": "0 4px 10px rgba(240, 147, 251, 0.3)"
+      "borderRadius": "6px",
+      "cursor": "pointer"
     }
-  }, ["📅 Study Roadmap"]), __jacJsx("button", {
+  }, ["📅 Roadmap"]), __jacJsx("button", {
     "onClick": function onClick() {
       runAgent("Market Analysis");
     },
     "disabled": loading,
     "style": {
-      "padding": "14px",
-      "background": "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+      "padding": "12px",
+      "background": "#27ae60",
       "color": "white",
       "border": "none",
-      "borderRadius": "8px",
-      "cursor": "pointer",
-      "fontSize": "0.95em",
-      "fontWeight": "600",
-      "transition": "transform 0.2s",
-      "boxShadow": "0 4px 10px rgba(79, 172, 254, 0.3)"
+      "borderRadius": "6px",
+      "cursor": "pointer"
     }
   }, ["📊 Job Market"]), __jacJsx("button", {
     "onClick": function onClick() {
@@ -566,16 +455,12 @@ function app() {
     },
     "disabled": loading,
     "style": {
-      "padding": "14px",
-      "background": "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
+      "padding": "12px",
+      "background": "#e67e22",
       "color": "white",
       "border": "none",
-      "borderRadius": "8px",
-      "cursor": "pointer",
-      "fontSize": "0.95em",
-      "fontWeight": "600",
-      "transition": "transform 0.2s",
-      "boxShadow": "0 4px 10px rgba(250, 112, 154, 0.3)"
+      "borderRadius": "6px",
+      "cursor": "pointer"
     }
   }, ["🔀 Alt Paths"]), __jacJsx("button", {
     "onClick": function onClick() {
@@ -584,17 +469,13 @@ function app() {
     "disabled": loading,
     "style": {
       "gridColumn": "1 / -1",
-      "padding": "14px",
-      "background": "linear-gradient(135deg, #30cfd0 0%, #330867 100%)",
+      "padding": "12px",
+      "background": "#34495e",
       "color": "white",
       "border": "none",
-      "borderRadius": "8px",
-      "cursor": "pointer",
-      "fontSize": "0.95em",
-      "fontWeight": "600",
-      "transition": "transform 0.2s",
-      "boxShadow": "0 4px 10px rgba(48, 207, 208, 0.3)"
+      "borderRadius": "6px",
+      "cursor": "pointer"
     }
-  }, ["📄 Resume Summary"])]), errorArea, loadingArea, resultArea])])])]);
+  }, ["📄 Generate Resume Summary"])]), resultArea, loadingArea])])]);
 }
 export { Header, app };
