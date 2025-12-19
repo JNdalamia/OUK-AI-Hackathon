@@ -1,27 +1,73 @@
-.env
-node_modules
+# ===============================
+# Node.js / Frontend (jac-client)
+# ===============================
 node_modules/
-Python
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-pycache/
-*.py[cod]
-*$py.class
-venv/
-.venv/
-env/
-.env
-
-Node/React
-
-node_modules/
+# Build outputs
 dist/
 build/
+.out/
+.cache/
+
+# Environment variables
+.env
+.env.local
+.env.development
+.env.production
+
+# ===============================
+# Python / Jaclang Backend
+# ===============================
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+venv/
+.venv/
+ENV/
+env/
+
+# Jaseci / Jac artifacts
+*.jac.py
+.jac_cache/
+.jaseci/
+.jac_build/
+
+# ===============================
+# IDE / Editor files
+# ===============================
+.vscode/
+.idea/
+*.swp
+*.swo
+*.iml
+
+# ===============================
+# OS files
+# ===============================
 .DS_Store
-coverage/
-.npm/
+Thumbs.db
 
-Jaseci/Jac
+# ===============================
+# Logs
+# ===============================
+*.log
 
-jac_gen/
-manifest.json
-*.jbc
+# ===============================
+# Testing / Coverage
+# ===============================
+.coverage
+htmlcov/
+.pytest_cache/
+
+# ===============================
+# Misc
+# ===============================
+*.tmp
+*.bak
